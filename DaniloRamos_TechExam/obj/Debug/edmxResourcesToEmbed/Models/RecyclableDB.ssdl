@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecyclableDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="RecyclableItem">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecyclableTypeId" Type="int" />
+    <Property Name="Weight" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ComputedRate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ItemDescription" Type="varchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="RecyclableType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="100" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MinKg" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="MaxKg" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <Function Name="viewRecyclable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="RecyclableDBModelStoreContainer">
+    <EntitySet Name="RecyclableItem" EntityType="Self.RecyclableItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecyclableType" EntityType="Self.RecyclableType" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

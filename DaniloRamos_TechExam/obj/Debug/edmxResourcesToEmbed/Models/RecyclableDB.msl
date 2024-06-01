@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RecyclableDBModelStoreContainer" CdmEntityContainer="RecyclableDBEntities">
+    <EntitySetMapping Name="RecyclableTypes">
+      <EntityTypeMapping TypeName="RecyclableDBModel.RecyclableType">
+        <MappingFragment StoreEntitySet="RecyclableType">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="MinKg" ColumnName="MinKg" />
+          <ScalarProperty Name="MaxKg" ColumnName="MaxKg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="viewRecyclable" FunctionName="RecyclableDBModel.Store.viewRecyclable">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="RecyclableDBModel.viewRecyclable_Result">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="ComputedRate" ColumnName="ComputedRate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="RecyclableItems">
+      <EntityTypeMapping TypeName="RecyclableDBModel.RecyclableItem">
+        <MappingFragment StoreEntitySet="RecyclableItem">
+          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+          <ScalarProperty Name="ComputedRate" ColumnName="ComputedRate" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="RecyclableTypeId" ColumnName="RecyclableTypeId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div style="padding:20px">
+
+        <h1>Recyclable Type</h1>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#emp_modal">Add</button>
+
+    </div>
+    <table id="tblRecyclableType" class="table table-bordered table-hover dataTable table-responsive" style="width:100%" role="grid" aria-describedby="example2_info"></table>
+
+
+    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" />
+
+    @section scripts{
+        <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+
+        <script src="~/Scripts/custom.js"></script>
+
+    }
+</div>
+
+<div class="modal fade" id="emp_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:300px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="exampleModalLabel">Recyclable Type</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" class="form-control" id="id">
+                    <div class="form-group">
+                        <label for="Type" class="col-form-label">Type:</label>
+                        <input type="text" class="form-control" id="Type">
+                    </div>
+                    <div class="form-group">
+                        <label for="Rate" class="col-form-label">Rate:</label>
+                        <input type="number" class="form-control" id="Rate">
+                    </div>
+                    <div class="form-group">
+                        <label for="MinKg" class="col-form-label">MinKg:</label>
+                        <input type="number" class="form-control" id="MinKg">
+                    </div>
+                    <div class="form-group">
+                        <label for="MaxKg" class="col-form-label">MaxKg:</label>
+                        <input type="number" class="form-control" id="MaxKg">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return Add()">Save</button>
+                <button type="button" class="btn btn-secondary" id="btnReset">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalconfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Are you sure to delete this record?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary btn-yesno">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>

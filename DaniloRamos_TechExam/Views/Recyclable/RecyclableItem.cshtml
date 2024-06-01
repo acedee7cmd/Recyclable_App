@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div style="padding:20px">
+        <h1>Recyclable Item</h1>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#item_modal">Add</button>
+    </div>
+    <table id="tblRecyclableItem" class="table table-bordered table-hover dataTable table-responsive" style="width:100%" role="grid" aria-describedby="example2_info"></table>
+
+
+    <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" />
+
+    @section scripts{
+        <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+
+        <script src="~/Scripts/custom.js"></script>
+
+    }
+</div>
+
+<div class="modal fade" id="item_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width:300px" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="exampleModalLabel">Recyclable Item</h5>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <input type="hidden" class="form-control" id="id">
+
+                    <input type="hidden" class="form-control" id="MinKg">
+                    <input type="hidden" class="form-control" id="MaxKg">
+                    <input type="hidden" class="form-control" id="rateTotal">
+                    <div class="form-group">
+                        Recyclable Type
+                        @Html.DropDownList("RecyclableTypeId", ViewData["id"] as SelectList, new { @class = "form-control", @id = "RecyclableTypeId" })
+                    </div>
+                    <div class="form-group">
+                        <label for="ItemDescription" class="col-form-label">Description:</label>
+                        <input type="text" class="form-control" id="ItemDescription">
+                    </div>
+                    <div class="form-group">
+                        <label for="Weight" class="col-form-label">Weight:</label>
+                        <input type="number" class="form-control" id="Weight">
+                    </div>
+                    <div class="form-group">
+                        <label for="ComputedRate" class="col-form-label">Computed Rate:</label>
+                        <input type="text" class="form-control" id="ComputedRate">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd" onclick="return AddItem()">Save</button>
+                <button type="button" class="btn btn-secondary" id="btnResetItem">Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalconfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5>Are you sure to delete this record?</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary btn-yesno">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
