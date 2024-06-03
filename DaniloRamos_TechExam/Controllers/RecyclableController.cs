@@ -20,11 +20,24 @@ namespace DaniloRamos_TechExam.Controllers
 
         public ActionResult RecyclableItem()
         {
-            //Department
-            var RecyclableTypeId = db.RecyclableTypes.OrderBy(a => a.id);
-            ViewBag.RecyclableTypeId = new SelectList(RecyclableTypeId, "id", "Type");
+            // Retrieve RecyclableType items ordered by id.
+            var recyclableTypes = db.RecyclableTypes.OrderBy(a => a.id).ToList();
+
+            // Create a default SelectList item
+            var defaultItem = new List<RecyclableType>()
+            {
+                new RecyclableType { id = 0, Type = "Select Type" } // Ensure that the id '0' does not conflict with existing ids
+            };
+
+            // Union the default item with the recyclableTypes list
+            var recyclableTypeList = defaultItem.Union(recyclableTypes).ToList();
+
+            // Pass the combined list to the ViewBag
+            ViewBag.RecyclableTypeId = new SelectList(recyclableTypeList, "id", "Type");
+
             return View();
         }
+
 
         public JsonResult listType()
         {

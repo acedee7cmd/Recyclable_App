@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     loadType();
     loadItem();
+    $('#RecyclableTypeId').val('0').find('option:first').prop('disabled', true);
 });
 
 $('#btnReset').on('click', function () {
@@ -38,22 +39,20 @@ function loadType() {
             }
         ]
     );
-    $("#tblRecyclableType tbody").on("click", "tr", function (e) {
-        var id = '';
-        if (!$(this).hasClass("dtactive")) {
-            $(this).parent().find("tr").removeClass("dtactive");
-            $(this).addClass("dtactive");
-            id = table.row(this).data().id;
-        }
-        $(".btn_delete").click(function () {
-            $("#modalconfirm").modal("show");
-            $(".btn-yesno").click(function () {
-                deleteType(id);
-            });
-        });
-
-    });
 }
+
+$("#tblRecyclableType tbody").on("click", "tr", function () {
+    $(this).addClass("dtactive").siblings().removeClass("dtactive");
+});
+
+$("#tblRecyclableType").on("click", ".btn_delete", function () {
+    var id = $(this).data('id');
+    $("#modalconfirm").modal("show");
+    $(".btn-yesno").off('click').on('click', function () {
+        deleteType(id);
+    });
+});
+
 function loadItem() {
     table = CreateDataTablesFormat("tblRecyclableItem", "/Recyclable/listItem",
         [
@@ -63,29 +62,27 @@ function loadItem() {
             { data: "Weight", title: "Weight", width: "-2px", orderable: false },
             { data: "ComputedRate", title: "Computed Rate", width: "-2px", orderable: false },
             {
-                "data": "id", "title": "ACTION", "width": "11%", "render": function (data) {
-                    return "<button type='button' class='btn btn-warning btn-sm flat' onclick='getItemById(" + data + ")'>Edit</button>" +
-                        " <button type='button' class='btn btn-danger btn-sm flat btn_delete'>Delete</button>";
+                
+                data: "id", title: "ACTION", width: "12%", render: function (data) {
+                    return `<button type='button' class='btn btn-warning btn-sm flat' onclick='getItemById(${data})'>Edit</button>` +
+                        `<button type='button' class='btn btn-danger btn-sm flat btn_delete' data-id='${data}'>Delete</button>`;
                 }
             }
         ]
     );
-    $("#tblRecyclableItem tbody").on("click", "tr", function (e) {
-        var id = '';
-        if (!$(this).hasClass("dtactive")) {
-            $(this).parent().find("tr").removeClass("dtactive");
-            $(this).addClass("dtactive");
-            id = table.row(this).data().id;
-        }
-        $(".btn_delete").click(function () {
-            $("#modalconfirm").modal("show");
-            $(".btn-yesno").click(function () {
-                deleteItem(id);
-            });
-        });
-
-    });
 }
+
+$("#tblRecyclableItem tbody").on("click", "tr", function () {
+    $(this).addClass("dtactive").siblings().removeClass("dtactive");
+});
+
+$("#tblRecyclableItem").on("click", ".btn_delete", function () {
+    var id = $(this).data('id');
+    $("#modalconfirm").modal("show");
+    $(".btn-yesno").off('click').on('click', function () {
+        deleteItem(id);
+    });
+});
 
 function deleteType(id) {
     fncExecute2('/Recyclable/DeleteType/', { ID: id },
